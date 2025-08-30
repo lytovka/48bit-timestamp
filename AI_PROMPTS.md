@@ -37,25 +37,25 @@ The solution **must** have a single export method `generateTimestamp48()`
 ```
 
 ### Prompt 2
-Commit: 9a0426711a01c526748c36ffb061e6931e36ab00
+Commit: `9a0426711a01c526748c36ffb061e6931e36ab00`
 ```text
 Let's update the implementation to always perform validation, regardless of the environment
 ```
 
 ### Prompt 3
-Commit: 482a2cd211ff35ba1c281690a68327cc1fd9bd37
+Commit: `482a2cd211ff35ba1c281690a68327cc1fd9bd37`
 ```text
 write unit tests for `generateTimestamp48`, including performance test for running 1 million iterations of `generateTimestamp48` function. Make sure to import all necessary modules from `node:test`.
 ```
 
 ### Prompt 4
-Commit: a0820927fdd7ef3dd8ff0e7ac6b3420c24104aff
+Commit: `a0820927fdd7ef3dd8ff0e7ac6b3420c24104aff`
 ```text
 Currently, one unit test is failing (`should throw error for invalid date`). Make sure the implementation includes assertion for invalid dates and throws exception in case invalid input was provided
 ```
 
 ### Prompt 5
-Commit: 0b277faa4117778e3de6ac769cec65e97daecce1
+Commit: `0b277faa4117778e3de6ac769cec65e97daecce1`
 ```text
 can you add `d.ts` file for `timestamp.js`?
 ```
