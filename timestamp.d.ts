@@ -10,6 +10,10 @@
  * - 6 bits: second (0-59)
  * - 10 bits: millisecond (0-999)
  *
+ * Bit layout for the 48-bit timestamp:
+ * Byte 0   Byte 1   Byte 2   Byte 3   Byte 4   Byte 5
+ * YYYYYYYY YYYYMMMM DDDDDHHH HHMMMMMM SSSSSSXX XXXXXXXX
+ *
  * @param date - Date to encode (defaults to current time)
  * @returns Base64URL encoded timestamp (8 characters)
  * @throws {Error} If date is invalid or any component exceeds bit capacity

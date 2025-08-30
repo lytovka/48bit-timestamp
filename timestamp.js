@@ -24,7 +24,6 @@ function generateTimestamp48(date = new Date()) {
     if (second > 59) throw new Error('Second exceeds 6-bit capacity (0-59)');
     if (millisecond > 999) throw new Error('Millisecond exceeds 10-bit capacity (0-999)');
 
-    // Directly set bytes in buffer - more efficient than shifting BigInt
     // First byte: high 8 bits of year
     buffer[0] = (year >> 4) & 0xFF;
 
