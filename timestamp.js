@@ -26,16 +26,14 @@ function generateTimestamp48(date = new Date()) {
     const second = date.getUTCSeconds();
     const millisecond = date.getUTCMilliseconds();
 
-    // Perform validation only in development/debug environments
-    if (process.env.NODE_ENV !== 'production') {
-        if (year > 4095) throw new Error('Year exceeds 12-bit capacity (0-4095)');
-        if (month > 12) throw new Error('Month exceeds 4-bit capacity (1-12)');
-        if (day > 31) throw new Error('Day exceeds 5-bit capacity (1-31)');
-        if (hour > 23) throw new Error('Hour exceeds 5-bit capacity (0-23)');
-        if (minute > 59) throw new Error('Minute exceeds 6-bit capacity (0-59)');
-        if (second > 59) throw new Error('Second exceeds 6-bit capacity (0-59)');
-        if (millisecond > 999) throw new Error('Millisecond exceeds 10-bit capacity (0-999)');
-    }
+    // Always perform validation
+    if (year > 4095) throw new Error('Year exceeds 12-bit capacity (0-4095)');
+    if (month > 12) throw new Error('Month exceeds 4-bit capacity (1-12)');
+    if (day > 31) throw new Error('Day exceeds 5-bit capacity (1-31)');
+    if (hour > 23) throw new Error('Hour exceeds 5-bit capacity (0-23)');
+    if (minute > 59) throw new Error('Minute exceeds 6-bit capacity (0-59)');
+    if (second > 59) throw new Error('Second exceeds 6-bit capacity (0-59)');
+    if (millisecond > 999) throw new Error('Millisecond exceeds 10-bit capacity (0-999)');
 
     // Directly set bytes in buffer - more efficient than shifting BigInt
     // First byte: high 8 bits of year
