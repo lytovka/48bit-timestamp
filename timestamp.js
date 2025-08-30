@@ -26,7 +26,6 @@ function generateTimestamp48(date = new Date()) {
     const second = date.getUTCSeconds();
     const millisecond = date.getUTCMilliseconds();
 
-    // Always perform validation
     if (year > 4095) throw new Error('Year exceeds 12-bit capacity (0-4095)');
     if (month > 12) throw new Error('Month exceeds 4-bit capacity (1-12)');
     if (day > 31) throw new Error('Day exceeds 5-bit capacity (1-31)');
