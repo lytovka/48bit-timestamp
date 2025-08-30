@@ -1,45 +1,4 @@
 /**
- * Decodes a 48-bit timestamp into a JavaScript Date object
- * @param {Buffer|Uint8Array|number[]} bytes - 6 bytes representing the timestamp
- * @returns {Date} JavaScript Date object
- */
-function decode48BitTimestamp(bytes) {
-    // Convert input to a 48-bit BigInt
-    let timestamp;
-    if (typeof bytes === 'number') {
-        timestamp = BigInt(bytes);
-    } else {
-        timestamp = 0n;
-        for (let i = 0; i < 6; i++) {
-            timestamp = (timestamp << 8n) | BigInt(bytes[i]);
-        }
-    }
-
-    // Extract components using BigInt operations
-    const millisecond = Number(timestamp & 0x3FFn);
-    timestamp = timestamp >> 10n;
-
-    const second = Number(timestamp & 0x3Fn);
-    timestamp = timestamp >> 6n;
-
-    const minute = Number(timestamp & 0x3Fn);
-    timestamp = timestamp >> 6n;
-
-    const hour = Number(timestamp & 0x1Fn);
-    timestamp = timestamp >> 5n;
-
-    const day = Number(timestamp & 0x1Fn);
-    timestamp = timestamp >> 5n;
-
-    const month = Number(timestamp & 0xFn) - 1; // JavaScript months are 0-based
-    timestamp = timestamp >> 4n;
-
-    const year = Number(timestamp & 0xFFFn);
-
-    return new Date(Date.UTC(year, month, day, hour, minute, second, millisecond));
-}
-
-/**
  * Encodes a JavaScript Date into a 48-bit timestamp
  * @param {Date} date - Date to encode
  * @returns {Buffer} 6-byte buffer containing the encoded timestamp
@@ -84,10 +43,8 @@ function encode48BitTimestamp(date) {
 }
 
 // Example usage
-const hexTimestamp = "7E3684CB594D"; // 2019-06-16 19:11:22.333
-const bytes = Buffer.from(hexTimestamp, 'hex');
-const date = decode48BitTimestamp(bytes);
-console.log(date.toISOString()); // Should output: 2019-06-16T19:11:22.333Z
-
-const encodedBuffer = encode48BitTimestamp(date);
-console.log(encodedBuffer.toString('hex').toUpperCase()); // Should output: 7E3684CB594D
+const now = new Date();
+const nowEncoded = encode48BitTimestamp(now);
+console.log('Now:', now.toISOString());
+console.log('Encoded:', nowEncoded.toString('hex').toUpperCase());
+console.log("base64url:", nowEncoded.toString('base64url'));
