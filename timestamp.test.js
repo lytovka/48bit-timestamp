@@ -67,8 +67,8 @@ describe('generateTimestamp48', () => {
             generateTimestamp48();
         }
         const endTime = process.hrtime.bigint();
-        const durationMs = (endTime - startTime) / 1000_000;
-        console.log(`Performance: ${iterations} iterations in ${durationMs.toFixed(2)}ms`);
+        const durationMs = (endTime - startTime) / 1000_000n;
+        console.log(`Performance: ${iterations} iterations in ${durationMs}ms`);
         assert.ok(durationMs < 500, `Performance test took too long: ${durationMs}ms`);
     });
 });

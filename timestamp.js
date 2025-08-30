@@ -12,8 +12,14 @@
  *
  * @param {Date} [date=new Date()] - Date to encode (defaults to current time)
  * @returns {string} Base64URL encoded timestamp (8 characters)
+ * @throws {Error} If date is invalid or any component exceeds bit capacity
  */
 function generateTimestamp48(date = new Date()) {
+    // Check if date is valid
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        throw new Error('Invalid date provided');
+    }
+
     // Pre-allocate the buffer for better performance
     const buffer = Buffer.allocUnsafe(6);
 
