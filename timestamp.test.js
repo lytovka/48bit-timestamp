@@ -60,7 +60,7 @@ describe('generateTimestamp48', () => {
     });
 
     // Performance test
-    it('performance: 1 million iterations', () => {
+    it('performance: 1 million iterations under 300ms', () => {
         const iterations = 1000_000;
         const startTime = process.hrtime.bigint();
         for (let i = 0; i < iterations; i++) {
@@ -69,6 +69,6 @@ describe('generateTimestamp48', () => {
         const endTime = process.hrtime.bigint();
         const durationMs = (endTime - startTime) / 1000_000n;
         console.log(`Performance: ${iterations} iterations in ${durationMs}ms`);
-        assert.ok(durationMs < 500, `Performance test took too long: ${durationMs}ms`);
+        assert.ok(durationMs < 300, `Performance test took too long: ${durationMs}ms`);
     });
 });
