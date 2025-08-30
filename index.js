@@ -3,7 +3,7 @@
  * @param {Date} date - Date to encode
  * @returns {Buffer} 6-byte buffer containing the encoded timestamp
  */
-function encode48BitTimestamp(date) {
+function generateTimestamp48(date = new Date()) {
     // Extract date components in UTC
     const year = date.getUTCFullYear();
     const month = date.getUTCMonth() + 1; // JavaScript months are 0-based
@@ -42,9 +42,27 @@ function encode48BitTimestamp(date) {
     return buffer;
 }
 
-// Example usage
+/**
+ * Runs a performance benchmark on timestamp encoding
+ * @param {number} iterations - Number of iterations to run
+ */
+function benchmarkTimestampEncoding(iterations) {
+    console.log(`Running benchmark with ${iterations.toLocaleString()} iterations...`);
+    const start = process.hrtime.bigint();
+    for (let i = 0; i < iterations; i++) {
+        generateTimestamp48(new Date(i));
+    }
+    const end = process.hrtime.bigint();
+    const durationMs = (end - start) / 1_000_000n;
+    console.log(`Total time: ${durationMs}ms`);
+}
+
+// Example single usage
 const now = new Date();
-const nowEncoded = encode48BitTimestamp(now);
+const nowEncoded = generateTimestamp48(now);
 console.log('Now:', now.toISOString());
 console.log('Encoded:', nowEncoded.toString('hex').toUpperCase());
 console.log("base64url:", nowEncoded.toString('base64url'));
+
+// Run benchmark
+benchmarkTimestampEncoding(1_000_000n);
