@@ -35,6 +35,7 @@ The 48-bit timestamp is constructed with the following bit allocation:
 All timestamps are generated in UTC time.
 
 ## Project structure
+```
 .
 ├── AI_PROMPTS.md # Development prompts used during implementation
 ├── LICENSE
@@ -43,3 +44,4 @@ All timestamps are generated in UTC time.
 ├── timestamp.d.ts # TypeScript declaration file
 ├── timestamp.js # Main implementation file
 └── timestamp.test.js # Unit tests
+```
